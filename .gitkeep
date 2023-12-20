@@ -1,0 +1,7 @@
+Api/
+Client/
+Server/
+
+*.csproj
+*.sln
+*.cs
