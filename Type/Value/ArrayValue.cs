@@ -5,8 +5,8 @@ public class ArrayValue<T>: IValue {
 
     private readonly string       _name;
     private readonly Action<T, T> _onChange;
-    private          T            _value;
     private readonly T[]          _values;
+    private          T            _value;
 
     public ArrayValue(in string name, in T value, params T[] values) {
         _name     = name;

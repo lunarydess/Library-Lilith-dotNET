@@ -2,7 +2,7 @@
 
 namespace Lilith.Utility;
 
-public class StringKit {
+public sealed class StringKit {
     #region Password
     private static readonly Random Random = new();
 
@@ -37,7 +37,7 @@ public class StringKit {
     private static readonly NumberFormatInfo ByteFormat = new() { NumberGroupSeparator = ",", NumberDecimalDigits = 2 };
 
     public static string FormatBytes(in double size) {
-        int unitIndex = (int) (Math.Log(d: size) / Math.Log(d: 1024));
+        int unitIndex = (int) (Math.Log(d: size) / Math.Log(d: 1024.0D));
 
         unitIndex = unitIndex < 0                    ? 0 :
                     unitIndex > ByteUnits.Length - 1 ? ByteUnits.Length - 1 : unitIndex;

@@ -1,6 +1,6 @@
 ﻿namespace Lilith.Utility;
 
-public class ArrayKit {
+public sealed class ArrayKit {
     #region SubAndMerge
     public static T[] Sub<T>(in T[] array, in int start, in int end) {
         int min = Math.Min(val1: start, val2: end),
