@@ -2,27 +2,27 @@
 
 public sealed class Arithmetics {
     #region Clamp
-    public static byte Clamp(byte value, byte minimum, byte maximum)
+    public static byte Clamp(in byte value, in byte minimum, in byte maximum)
         => value < minimum ? minimum :
            value > maximum ? maximum : value;
 
-    public static short Clamp(short value, short minimum, short maximum)
+    public static short Clamp(in short value, in short minimum, in short maximum)
         => value < minimum ? minimum :
            value > maximum ? maximum : value;
 
-    public static int Clamp(int value, int minimum, int maximum)
+    public static int Clamp(in int value, in int minimum, in int maximum)
         => value < minimum ? minimum :
            value > maximum ? maximum : value;
 
-    public static long Clamp(long value, long minimum, long maximum)
+    public static long Clamp(in long value, in long minimum, in long maximum)
         => value < minimum ? minimum :
            value > maximum ? maximum : value;
 
-    public static float Clamp(float value, float minimum, float maximum)
+    public static float Clamp(in float value, in float minimum, in float maximum)
         => value < minimum ? minimum :
            value > maximum ? maximum : value;
 
-    public static double Clamp(double value, double minimum, double maximum)
+    public static double Clamp(in double value, in double minimum, in double maximum)
         => value < minimum ? minimum :
            value > maximum ? maximum : value;
     #endregion
