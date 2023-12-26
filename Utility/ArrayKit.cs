@@ -37,7 +37,7 @@ public sealed class ArrayKit {
     #endregion
 
     #region Add
-    public static T[] Add<T>(in T[] array, in T adding) => Add(array: in array, adding: in adding, index: array.Length);
+    public static T[] Add<T>(in T[] array, in T adding) => Add(array: in array, adding: in adding, index: array.Length - 1);
 
     public static T[] Add<T>(in T[] array, in T adding, in int index) {
         var result = new T[array.Length + 1];

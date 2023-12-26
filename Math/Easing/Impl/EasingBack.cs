@@ -2,7 +2,11 @@
 
 public sealed class EasingBack: Easing {
     public EasingBack(in long millis, in double end): base(millis: millis, end: end) {}
-    public EasingBack(in long millis, in double end, in bool backwards): base(millis: millis, end: end, backwards: backwards) {}
+
+    public EasingBack(in long millis, in double end, in bool backwards): base(millis: millis,
+                                                                              end: end,
+                                                                              backwards: backwards) {
+    }
 
     protected override double Equation(in Type type, in double value) {
         const double c2 = 2.5949095D;
