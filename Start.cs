@@ -4,7 +4,7 @@ namespace Library_Lilith;
 
 public class Start {
     private static readonly EventManager EventManager = new();
-
+    
     public static void Main(params string[] args) {
         EventManager.Register<EventA>(aEvent => Console.WriteLine($"Event A says hello with {aEvent.GetTest()}!"));
         EventManager.Register<EventB>(bEvent => Console.WriteLine($"Event B says hello with {bEvent.GetTest()}!"));
