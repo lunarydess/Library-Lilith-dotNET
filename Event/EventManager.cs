@@ -4,15 +4,12 @@ using Lilith.Utility;
 namespace Library_Lilith.Event;
 
 public sealed class EventManager {
-    public delegate T EventAction<out T>(in IEvent @event) where T : IEvent;
+    private readonly ConcurrentDictionary<System.Type, Action<IEvent>[]> _events = new();
 
-    private readonly ConcurrentDictionary<System.Type, EventAction<IEvent>[]> _events = new();
-
-    public void Register<TEvent>(EventAction<TEvent> action) where TEvent : class, IEvent {
+    public void Register<TEvent>(Action<TEvent> action) where TEvent : IEvent {
         _events.TryRemove(key: typeof(TEvent), value: out var actions);
-        actions ??= Array.Empty<EventAction<IEvent>>();
-        Console.WriteLine(action);
-        _events.TryAdd(key: typeof(TEvent), value: ArrayKit.Add(array: actions, adding: action));
+        actions ??= Array.Empty<Action<IEvent>>();
+        _events.TryAdd(key: typeof(TEvent), value: ArrayKit.Add(array: actions, adding: e => action((TEvent)e)));
     }
 
     public void Call<TEvent>(in TEvent aEvent) where TEvent : IEvent {
