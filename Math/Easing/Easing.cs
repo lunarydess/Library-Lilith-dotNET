@@ -1,4 +1,4 @@
-﻿namespace Library_Lilith.Math.Easing;
+﻿namespace Lilith.Math.Easing;
 
 public abstract class Easing {
     public enum Type { In, Out, InOut }

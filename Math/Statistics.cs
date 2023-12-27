@@ -1,4 +1,4 @@
-﻿namespace Library_Lilith.Math;
+﻿namespace Lilith.Math;
 
 public class Statistics {
     #region Median

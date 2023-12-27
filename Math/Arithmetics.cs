@@ -1,4 +1,4 @@
-﻿namespace Library_Lilith.Math;
+﻿namespace Lilith.Math;
 
 public sealed class Arithmetics {
     #region Average

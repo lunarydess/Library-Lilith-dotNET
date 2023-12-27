@@ -1,4 +1,4 @@
-﻿namespace Library_Lilith.Math;
+﻿namespace Lilith.Math;
 
 public class MsTimer {
     private double _millis = DateTimeOffset.Now.ToUnixTimeMilliseconds();

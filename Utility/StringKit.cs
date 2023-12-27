@@ -37,13 +37,13 @@ public sealed class StringKit {
     private static readonly NumberFormatInfo ByteFormat = new() { NumberGroupSeparator = ",", NumberDecimalDigits = 2 };
 
     public static string FormatBytes(in double size) {
-        int unitIndex = (int) (Math.Log(d: size) / Math.Log(d: 1024.0D));
+        int unitIndex = (int) (System.Math.Log(d: size) / System.Math.Log(d: 1024.0D));
 
         unitIndex = unitIndex < 0                    ? 0 :
                     unitIndex > ByteUnits.Length - 1 ? ByteUnits.Length - 1 : unitIndex;
 
         return
-        $"{(size / Math.Pow(x: 1024, y: unitIndex)).ToString("#,##0.##", provider: ByteFormat)} {ByteUnits[unitIndex]}";
+        $"{(size / System.Math.Pow(x: 1024, y: unitIndex)).ToString("#,##0.##", provider: ByteFormat)} {ByteUnits[unitIndex]}";
     }
     #endregion
 

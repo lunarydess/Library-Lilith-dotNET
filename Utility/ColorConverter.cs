@@ -55,7 +55,7 @@ public sealed class ColorConverter {
     /// <param name="alpha">The alpha of the HSVa color.</param>
     /// <returns>An RGBA float array.</returns>
     public static float[] HsvaToRgba(in float hue, in float saturation, in float value, in float alpha) {
-        int hi = (int) Math.Round(value: hue * 6.0F, digits: 0);
+        int hi = (int) System.Math.Round(value: hue * 6.0F, digits: 0);
 
         float f = hue * 6.0F - hi;
 

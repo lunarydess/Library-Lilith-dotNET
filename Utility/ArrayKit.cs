@@ -3,8 +3,8 @@
 public sealed class ArrayKit {
     #region SubAndMerge
     public static T[] Sub<T>(in T[] array, in int start, in int end) {
-        int min = Math.Min(val1: start, val2: end),
-            max = Math.Max(val1: start, val2: end);
+        int min = System.Math.Min(val1: start, val2: end),
+            max = System.Math.Max(val1: start, val2: end);
 
         if (min == array.Length || array.Length <= 1) return Array.Empty<T>();
         var objs = new T[max - min + 1];

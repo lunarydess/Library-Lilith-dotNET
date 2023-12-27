@@ -1,4 +1,4 @@
-﻿namespace Library_Lilith.Math.Easing.Impl;
+﻿namespace Lilith.Math.Easing.Impl;
 
 public sealed class EasingCirc: Easing {
     public EasingCirc(in long millis, in double end): base(millis: millis, end: end) {}

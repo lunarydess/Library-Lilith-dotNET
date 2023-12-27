@@ -1,4 +1,4 @@
-﻿namespace Library_Lilith.Type.Value;
+﻿namespace Lilith.Type.Value;
 
 public class GenericValue<T>: IValue {
     private static readonly Action<T, T> EmptyAction = (_, _) => {};

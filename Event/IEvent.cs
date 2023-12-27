@@ -1,3 +1,3 @@
 ﻿// @formatter:off
-namespace Library_Lilith.Event;
+namespace Lilith.Event;
 public interface IEvent {}
