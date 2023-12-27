@@ -1,7 +1,7 @@
 ﻿namespace Lilith.Utility;
 
 public sealed class ArrayKit {
-    #region SubAndMerge
+    #region Other
     public static T[] Sub<T>(in T[] array, in int start, in int end) {
         int min = System.Math.Min(val1: start, val2: end),
             max = System.Math.Max(val1: start, val2: end);
@@ -34,10 +34,19 @@ public sealed class ArrayKit {
 
         return objs;
     }
+
+    public static T[] Reverse<T>(in T[] array) {
+        var objs = new T[array.Length];
+
+        for (int i = array.Length ; i > 0 ; i--) objs[i] = array[i];
+
+        return objs;
+    }
     #endregion
 
     #region Add
-    public static T[] Add<T>(in T[] array, in T adding) => Add(array: in array, adding: in adding, index: array.Length - 1);
+    public static T[] Add<T>(in T[] array, in T adding) =>
+    Add(array: in array, adding: in adding, index: array.Length - 1);
 
     public static T[] Add<T>(in T[] array, in T adding, in int index) {
         var result = new T[array.Length + 1];
