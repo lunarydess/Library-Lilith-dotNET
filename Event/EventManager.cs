@@ -4,12 +4,22 @@ using Lilith.Utility;
 namespace Lilith.Event;
 
 public sealed class EventManager {
-    private readonly ConcurrentDictionary<System.Type, Action<IEvent>[]> _events = new();
+    private readonly ConcurrentDictionary<object, Action<IEvent>>        _cachedActions = new();
+    private readonly ConcurrentDictionary<System.Type, Action<IEvent>[]> _events        = new();
 
     public void Register<TEvent>(Action<TEvent> action) where TEvent : IEvent {
         _events.TryRemove(key: typeof(TEvent), value: out var actions);
         actions ??= Array.Empty<Action<IEvent>>();
-        _events.TryAdd(key: typeof(TEvent), value: ArrayKit.Add(array: actions, adding: e => action((TEvent) e)));
+        var newAction = (IEvent e) => action((TEvent) e);
+        if (_events.TryAdd(key: typeof(TEvent), value: ArrayKit.Add(array: actions, adding: newAction)))
+            _cachedActions.TryAdd(action, newAction);
+    }
+
+    public void Unregister<TEvent>(Action<TEvent> action) where TEvent : IEvent {
+        _events.TryGetValue(key: typeof(TEvent), value: out var actions);
+        actions ??= Array.Empty<Action<IEvent>>();
+        if (actions.Length is not 0 && _cachedActions.TryGetValue(action, out var removingAction))
+            _events.TryUpdate(typeof(TEvent), ArrayKit.Remove(actions, removingAction), actions);
     }
 
     public void Call<TEvent>(in TEvent aEvent) where TEvent : IEvent {
