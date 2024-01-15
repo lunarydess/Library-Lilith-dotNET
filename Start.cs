@@ -1,4 +1,5 @@
 ﻿using Lilith.Event;
+using Lilith.Utility;
 
 namespace Lilith;
 
@@ -19,7 +20,7 @@ public class Start {
         EventManager.Register(_handlerB1);
         EventManager.Register(_handlerB2);
 
-        const int iters = 100;
+        const int iters = 1000;
         for (int i = 0 ; i < iters ; i++) {
             EventManager.Call(new EventA("woah"));
             EventManager.Call(new EventB("hellow"));
@@ -32,18 +33,25 @@ public class Start {
         }
     }
 
-    public sealed class EventA: IEvent {
+    public sealed class EventA: AbstractEvent {
         private readonly string _test;
         public EventA(in string test) { _test = test; }
         public string GetTest() => _test;
 
+        public override bool Equals(object? obj) => obj is EventA a && a._test == _test;
+        public override int  GetHashCode()       => Hashing.Hash(_test, typeof(EventA));
+
         public override string ToString() => $"EventA{GetTest()}";
     }
 
-    public sealed class EventB: IEvent {
+    public sealed class EventB: AbstractEvent {
         private readonly string _test;
         public EventB(in string test) { _test = test; }
-        public          string GetTest()  => _test;
+        public string GetTest() => _test;
+
+        public override bool Equals(object? obj) => obj is EventB b && b._test == _test;
+        public override int  GetHashCode()       => Hashing.Hash(_test, typeof(EventA));
+
         public override string ToString() => $"EventB{GetTest()}";
     }
 }

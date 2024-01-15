@@ -1,6 +1,6 @@
 ﻿namespace Lilith.Math;
 
-public sealed class Polynomials {
+public sealed class Interpolation {
     #region Lerp
     public static float Lerp(in float min, in float max, in float delta) =>
     Arithmetics.Clamp(value: (1.0F - delta) * min + delta * max, minimum: min, maximum: max);
