@@ -2,22 +2,6 @@
 
 public sealed class ArrayKit {
     #region Other
-    public static T[] Sub<T>(in T[] array, in int start, in int end) {
-        int min = System.Math.Min(val1: start, val2: end),
-            max = System.Math.Max(val1: start, val2: end);
-
-        if (min == array.Length || array.Length <= 1) return Array.Empty<T>();
-        var objs = new T[max - min + 1];
-
-        Array.Copy(sourceArray: array,
-                   sourceIndex: min,
-                   destinationArray: objs,
-                   destinationIndex: 0,
-                   length: objs.Length);
-
-        return objs;
-    }
-
     public static T[] Merge<T>(in T[] array1, in T[] array2) {
         var objs = new T[array1.Length + array2.Length];
 
@@ -44,11 +28,34 @@ public sealed class ArrayKit {
     }
     #endregion
 
+    #region Slice
+    public static T[] SliceFrom<T>(in T[] array, in int start, in int end) =>
+    Slice(array: array, start: start, end: array.Length - 1);
+
+    public static T[] SliceBehind<T>(in T[] array, in int start, in int end) => Slice(array: array, start: 0, end: end);
+
+    public static T[] Slice<T>(in T[] array, in int start, in int end) {
+        int min = System.Math.Min(val1: start, val2: end),
+            max = System.Math.Max(val1: start, val2: end);
+
+        if (min == array.Length || array.Length <= 1) return Array.Empty<T>();
+
+        var objs = new T[array.Length - (start + (array.Length - 1 - end))];
+        Array.Copy(sourceArray: array,
+                   sourceIndex: start,
+                   destinationArray: objs,
+                   destinationIndex: 0,
+                   length: objs.Length);
+
+        return objs;
+    }
+    #endregion
+
     #region Add
     public static T[] Add<T>(in T[] array, in T adding) =>
-    Add(array: in array, adding: in adding, index: array.Length - 1);
+    AddAt(array: in array, adding: in adding, index: array.Length - 1);
 
-    public static T[] Add<T>(in T[] array, in T adding, in int index) {
+    public static T[] AddAt<T>(in T[] array, in T adding, in int index) {
         var result = new T[array.Length + 1];
 
         if (result.Length == 0 || index < -1 || index > array.Length - 1) return Array.Empty<T>();
@@ -89,7 +96,10 @@ public sealed class ArrayKit {
     #endregion
 
     #region Remove
-    public static T[] Remove<T>(in T[] array, in int index) {
+    public static T[] Remove<T>(in T[] array, in T removing) =>
+    RemoveAt(array: array, index: IndexOf(array: array, searching: removing));
+
+    public static T[] RemoveAt<T>(in T[] array, in int index) {
         var result = new T[array.Length - 1];
 
         if (result.Length == 0 || index < 0 || index > array.Length - 1) return Array.Empty<T>();
@@ -107,9 +117,6 @@ public sealed class ArrayKit {
 
         return result;
     }
-
-    public static T[] Remove<T>(in T[] array, in T removing) =>
-    Remove(array: array, index: IndexOf(array: array, searching: removing));
     #endregion
 
     #region ToString
