@@ -1,6 +1,7 @@
-Api/
-Client/
-Server/
+Event/
+Math/
+Type/
+Utility/
 
 *.csproj
 *.sln
